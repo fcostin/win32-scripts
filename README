@@ -1,0 +1,7 @@
+contents:
+
+	win32_chowntree.py	# recursively set permissions of path
+				# to allow all access for everyone
+				# (to delete folders lying about from
+				# previous installs with screwed
+				# permissions)
