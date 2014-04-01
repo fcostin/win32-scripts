@@ -37,16 +37,16 @@ def remove_list_items_in_place(a, indices):
 
 TWO_WEEKS_IN_SECONDS = 60 * 60 * 24 * 7 * 2
 
-def parse_args(args):
-    p = argparse.ArgumentParser()
+def parse_args():
+    p = argparse.ArgumentParser(description='deletes old files from your temp directory')
     p.add_argument('--temp-root', default=None, type=str, help='root of temp dir. defaults to win32api.GetTempPath().')
     p.add_argument('--actually-delete', default=False, action='store_true', help='ACTUALLY DELETE. ARE YOU SURE?')
     p.add_argument('--max-age', default=TWO_WEEKS_IN_SECONDS, type=int, help='max age, in seconds. defaults to 2 weeks.')
     p.add_argument('--log-level', default='INFO', type=str, help='log level')
-    return p.parse_args(args)
+    return p.parse_args()
 
 def main():
-    args = parse_args(sys.argv[1:])
+    args = parse_args()
     logging.basicConfig(level=args.log_level)
     temp_root = args.temp_root
     if temp_root is None:

@@ -20,15 +20,16 @@ win32 scripts
                             account name. Default is "Everyone".
 
 `clean_temp_files`
+------------------
 
-deletes old temp files from your temp directory.
 
 ### usage
 
-
-    C:\> python clean_temp_files.py --help
+    C:\projects\win32-scripts>python clean_temp_files.py --help
     usage: clean_temp_files.py [-h] [--temp-root TEMP_ROOT] [--actually-delete]
                                [--max-age MAX_AGE] [--log-level LOG_LEVEL]
+
+    deletes old files from your temp directory
 
     optional arguments:
       -h, --help            show this help message and exit
