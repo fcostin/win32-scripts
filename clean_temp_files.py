@@ -62,7 +62,12 @@ def main():
     logging.info('actually_delete = %r' % (args.actually_delete, ))
 
     def has_old_mtime(p):
-        return os.path.getmtime(p) < min_mtime
+        try:
+            result = os.path.getmtime(p) < min_mtime
+        except Exception as e:
+            logging.error('cannot get mtime of %r; assuming it is not old. detail: %r' % (p, e))
+            result = False
+        return result
 
     def noop(x):
         pass
@@ -76,11 +81,10 @@ def main():
     err_stat_by_type = collections.defaultdict(lambda : 0)
 
     for x_type, x in gen_pruned_tree(has_old_mtime, temp_root):
-        x_mtime = os.path.getmtime(x)
-        days_old = float(current_time - x_mtime) / (60 * 60 * 24)
-        logging.debug('found %r of %r that is %.1f days old' % (x, x_type, days_old))
-
         try:
+            x_mtime = os.path.getmtime(x)
+            days_old = float(current_time - x_mtime) / (60 * 60 * 24)
+            logging.debug('found %r of %r that is %.1f days old' % (x, x_type, days_old))
             handler_by_type[x_type](x)
             stat_by_type[x_type] += 1
         except Exception as e:
