@@ -40,6 +40,10 @@ win32 scripts
       --log-level LOG_LEVEL
                             log level
 
+### known issues:
+
+*   this relies upon `os.walk`, which constructs a list of dirs and a list of files in the dir it is visiting. this means it is incredibly slow at navigating directories containing huge numbers of files/dirs. your top-level temp dir may be such a dir.
+
 ### alternate approaches:
 
 1.  http://windows.microsoft.com/en-us/windows7/schedule-disk-cleanup-to-run-regularly -- *which opens a dialog*
